@@ -19,3 +19,6 @@ type Memory = Bool -- TODO: replace by your choice to implement computers memory
 -- TODO: implement running the program, use your Memory and Stack (from Data.Stack)
 runProgram :: Program -> Input -> Output
 runProgram = undefined
+
+
+-- Feel free to create helper functions

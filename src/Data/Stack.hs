@@ -1,8 +1,8 @@
 module Data.Stack where
 
 -- https://en.wikipedia.org/wiki/Stack_(abstract_data_type)
--- TODO: implement stack data structure
-data Stack a = ToDo
+data Stack a = Empty | NonEmpty a (Stack a)
+             deriving (Show, Read, Eq)
 
 -- Get element from top of stack
 -- If stack is empty error with message "Empty stack" will be raised
