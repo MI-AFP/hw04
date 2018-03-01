@@ -19,8 +19,8 @@ data Instruction = TA Address -- Push address to stack (shared stack for values 
                  | WR         -- Write value from top of stack to output
                  | RD         -- Read value from input to top of stack
                  | AD         -- Add two values from stack and replace them by result
-                 | SU         -- Subtract (as above first - second)
-                 | MU         -- Multiply (as above)
+                 | SB         -- Subtract (as above first - second)
+                 | MT         -- Multiply (as above)
                  | DI         -- Divide (as above first / second)
                  | JU Label   -- Jump to label
                  | JZ Label   -- Jump to label if zero is on top of stack and remove it (otherwise just remove)
