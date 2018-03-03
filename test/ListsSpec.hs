@@ -33,11 +33,13 @@ spec :: Spec
 spec = do
   describe "pythagoreanTriples" $ do
     it "contains trivial starts" $
-      take 4 pythagoreanTriples `shouldBe` [(3,4,5),(5,12,13),(7,24,25),(8,15,17)]
+      take 5 pythagoreanTriples `shouldBe` [(3,4,5),(6,8,10),(5,12,13),(9,12,15),(8,15,17)]
     it "contains non-trivial triples" $ do
       take 100 pythagoreanTriples `shouldContain` [(25,60,65)]
       take 100 pythagoreanTriples `shouldContain` [(27,36,45)]
       take 100 pythagoreanTriples `shouldContain` [(45,60,75)]
+      take 100 pythagoreanTriples `shouldContain` [(40,75,85)]
+
   describe "eyeMatrix" $ do
     it "works for trivial cases" $ do
       eyeMatrix 0 `shouldBe` [[]]
@@ -48,6 +50,7 @@ spec = do
       eyeMatrix 10 `shouldBe` eye10
       head (eyeMatrix 100) `shouldBe` 1 : replicate 99 0
       last (eyeMatrix 100) `shouldBe` replicate 99 0 ++ [1]
+
   describe "matrixMultiplication" $ do
     it "works for trivial cases" $ do
       matrixMultiplication [[1]] [[1]] `shouldBe` [[1]]

@@ -10,18 +10,9 @@ import Control.Program
 --         TA 0
 --         RD
 --         ST           // store N to MEM[0]
---         TA 0
---         DR           // read N from MEM[0]
---         JZ "END"     // if N == 0, goto "END"
 --         TA 1
---         RD
---         ST           // store X to MEM[1]
---         TA 0
---         TA 0
---         DR           // read N from MEM[0]
---         TV -1
---         AD
---         ST           // store N-1 to MEM[0]
+--         TV 0
+--         ST           // store 0 to MEM[1]
 -- "LOOP": TA 0
 --         DR           // read N from MEM[0]
 --         JZ "PRNT"    // if N == 0, goto "PRNT"
@@ -43,7 +34,7 @@ import Control.Program
 --         WR           // write X to output
 -- "END":  EOP
 sumList :: Program
-sumList = TA 0 $. RD $. ST $. TA 0 $. DR $. JZ "END" $. TA 1 $. RD $. ST $. TA 0 $. TA 0 $. DR $. TV (-1) $. AD $. ST $. "LOOP" $: TA 0 $. DR $. JZ "PRNT" $. TA 1 $. TA 1 $. DR $. RD $. AD $. ST $. TA 0 $. TA 0 $. DR $. TV (-1) $. AD $. ST $. JU "LOOP" $. "PRNT" $: TA 1 $. DR $. WR $. "END" $: EOP
+sumList = TA 0 $. RD $. ST $. TA 1 $. TV 0 $. ST $. "LOOP" $: TA 0 $. DR $. JZ "PRNT" $. TA 1 $. TA 1 $. DR $. RD $. AD $. ST $. TA 0 $. TA 0 $. DR $. TV (-1) $. AD $. ST $. JU "LOOP" $. "PRNT" $: TA 1 $. DR $. WR $. "END" $: EOP
 
 -- GCD euclidean algorithm of two NON-NEGATIVE integers A, B, where A >= B
 --
@@ -55,22 +46,22 @@ sumList = TA 0 $. RD $. ST $. TA 0 $. DR $. JZ "END" $. TA 1 $. RD $. ST $. TA 0
 --         ST           // store B to MEM[1]
 -- "LOOP": TA 1
 --         DR
---         JZ "PRNT"
+--         JZ "PRNT"    // if B == 0 go to PRNT
 --         TA 2
 --         TA 1
 --         DR
 --         ST           // copy B to MEM[2] (TMP)
---         TA 1         // where mod should be places
---         TA 0
---         DR
+--         TA 1         // where mod should be placed
 --         TA 1
---         DR
---         TA 0
---         DR
+--         DR           // B
 --         TA 1
---         DR
+--         DR           // B
+--         TA 0
+--         DR           // A
 --         DI           // A/B
 --         MT           // (A/B) * B
+--         TA 0
+--         DR           // A
 --         SB           // A - (A/B) * B == A mod B
 --         ST           // store A mod B to MEM[1] (new B)
 --         TA 0
@@ -83,7 +74,7 @@ sumList = TA 0 $. RD $. ST $. TA 0 $. DR $. JZ "END" $. TA 1 $. RD $. ST $. TA 0
 --         WR           // write A to output
 -- "END":  EOP
 gcd :: Program
-gcd = TA 0 $. RD $. ST $. TA 1 $. RD $. ST $. "LOOP" $: TA 1 $. DR $. JZ "PRNT" $. TA 2 $. TA 1 $. DR $. ST $. TA 1 $. TA 0 $. DR $. TA 1 $. DR $. TA 0 $. DR $. TA 1 $. DR $. DI $. MT $. SB $. ST $. TA 0 $. TA 2 $. DR $. ST $. JU "LOOP" $. "PRNT" $: TA 0 $. DR $. WR $. "END" $: EOP
+gcd = TA 0 $. RD $. ST $. TA 1 $. RD $. ST $. "LOOP" $: TA 1 $. DR $. JZ "PRNT" $. TA 2 $. TA 1 $. DR $. ST $. TA 1 $. TA 1 $. DR $. TA 1 $. DR $. TA 0 $. DR $. DI $. MT $. TA 0 $. DR $. SB $. ST $. TA 0 $. TA 2 $. DR $. ST $. JU "LOOP" $. "PRNT" $: TA 0 $. DR $. WR $. "END" $: EOP
 
 -- Fibonacci number for given N (>=0)
 --
