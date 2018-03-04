@@ -4,6 +4,9 @@ module Data.Stack where
 data Stack a = Empty | NonEmpty a (Stack a)
              deriving (Show, Read, Eq)
 
+empty :: Stack a
+empty = Empty
+
 -- Get element from top of stack
 -- If stack is empty error with message "Empty stack" will be raised
 -- TODO: implement top

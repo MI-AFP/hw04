@@ -32,13 +32,14 @@ data Program = EOP                        -- End of program
              | Label `Marks` Program      -- Marked program by label (for jumping)
              deriving (Show, Read, Eq)
 
+-- Note: This tells how the operators will be treated in infix (right associative + priority)
 infixr 0 $.
 infixr 0 $:
 
--- Sequencing infix operator
+-- | Sequencing infix operator
 ($.) :: Instruction -> Program -> Program
 ($.) = Then
 
--- Marking infix operator
+-- | Marking infix operator
 ($:) :: Label -> Program -> Program
 ($:) = Marks

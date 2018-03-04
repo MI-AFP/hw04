@@ -74,9 +74,9 @@ spec = do
       evaluate (runProgram (TV 0 $. TA 1 $. ST $. TA 0 $. DR $. WR $. EOP) Seq.empty) `shouldThrow` errorCall "Not value"
       evaluate (runProgram (TA 0 $. TA 1 $. ST $. TA 0 $. DR $. WR $. EOP) Seq.empty) `shouldThrow` errorCall "Not value"
       evaluate (runProgram (TA 0 $. TV 1 $. ST $. TV 0 $. DR $. WR $. EOP) Seq.empty) `shouldThrow` errorCall "Not address"
-    it "fails with unintialized memory cell" $ do
-      evaluate (runProgram (TA 0 $. TV 1 $. ST $. TA 1 $. DR $. WR $. EOP) Seq.empty) `shouldThrow` errorCall "Uninitalized memory"
-      evaluate (runProgram (TA 0 $. DR $. WR $. EOP) Seq.empty) `shouldThrow` errorCall "Uninitalized memory"
+    it "fails with uninitialized memory cell" $ do
+      evaluate (runProgram (TA 0 $. TV 1 $. ST $. TA 1 $. DR $. WR $. EOP) Seq.empty) `shouldThrow` errorCall "Uninitialized memory"
+      evaluate (runProgram (TA 0 $. DR $. WR $. EOP) Seq.empty) `shouldThrow` errorCall "Uninitialized memory"
     it "fails with not enough entries on stack" $ do
       evaluate (runProgram (ST $. TA 0 $. DR $. WR $. EOP) Seq.empty) `shouldThrow` errorCall "Empty stack"
       evaluate (runProgram (TV 1 $. ST $. TA 0 $. DR $. WR $. EOP) Seq.empty) `shouldThrow` errorCall "Empty stack"
