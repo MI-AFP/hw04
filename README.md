@@ -20,7 +20,6 @@ Hints & general requirements:
 * For stack and stack machine, use pattern matching to the maximum! It is possible to implement both **without** using `if-then-else`. Recall that you can use "deeper" pattern matching (e.g., `foo (Maybe (x:xs))`) and that you should use wildcard `_` if you don't need the value.
 * You can think about a program as a special list of instructions which you can process recursively and pass some context (I/O and internal state) along the way.
 * For jump instruction, first construct the map with labels as keys and programs as values. This map you will then pass all the time without changing. There are no global variables! There is no mutability!
-* In `Lists` use [list comprehensions](https://wiki.haskell.org/List_comprehension) instead of recursion. If nesting them is too complex for you, use some local function for inner list comprehension.
 * In this homework you will work with various containers, look up the documentation. *Do not re-invent the wheel!*
 * You must understand your code completely!
 
