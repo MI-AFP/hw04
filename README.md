@@ -1,20 +1,19 @@
 # MI-AFP homework #04
 
-Homework to practice types for text, containers, and work with errors 
+Homework to practice types for text, containers, and work with errors
 
 ## Task
 
 This time your task is more complex, you have some TODOs in three files and there is one more containing important data types for your implementation.
 
-1. First *warm-up* task is to implement 7 very simple functions in `Data.Stack` (`src/Data/Stack.hs`). Do not change the data type definition and just implement functions typical for stack data structure (`pop`, `push`, `top`, `size`, `null`) and also `popSafe` + `topSafe` which use `Maybe` data type instead of throwing errors for empty stack. 
+1. First *warm-up* task is to implement 7 very simple functions in `Data.Stack` (`src/Data/Stack.hs`). Do not change the data type definition and just implement functions typical for stack data structure (`pop`, `push`, `top`, `size`, `null`) and also `popSafe` + `topSafe` which use `Maybe` data type instead of throwing errors for empty stack.
 2. After implementing `Data.Stack` you can proceed to implement `StackMachine`. Take a look at `Control.Program` where you find definitions of `Instruction`, `Program`, and other data types which you have to use (but do not change them). Then in `StackMachine` are prepared type synonyms which should be used in your implementation of `runProgram` as well. Stack machine takes a program with input and returns output (or throws an appropriate error).   
   You will need some helper function that includes stack, memory, and directory of labels (used for jumping). Implement logic of each instruction, their semantics are described in `Control.Program` and by tests in `test/StackMachineSpec.hs`. When all of them working correctly, you should be able to run more complex programs from `test/Fixtures/Programs.hs`.
-3. Little bit off-topic task can be found in `Lists`, where you should apply knowledge about [list comprehensions](https://wiki.haskell.org/List_comprehension) (*do NOT use recursion*).
-   * `pythagoreanTriples` = endless list of [Pythagorean triples](https://en.wikipedia.org/wiki/Pythagorean_triple) (contains also primitive triples) = all `(a, b, c)` which comply with `a² + b² = c²`. The challenge here is to set-up the bounds correctly.
-   * `eyeMatrix n` = forms square identity matrix of dimension `n` (nested lists, sublists are rows)
-   * `matrixMultiplication x y` = returns product of two matrices `x` and `y` ([matrix multiplication](https://en.wikipedia.org/wiki/Matrix_multiplication), check the size)
+3. Your last task is to implement *TODOs* in `Data.Logging`:
+   * Implement three operators `$=` (change log level), `@@` (combine event sources), and `~~` (event source matching).
+   * Use the `~~` operator and one powerful but simple higher-order function to implement `logFilter`. **Pointfree style is required!**
 
-Hints & general requirements: 
+Hints & general requirements:
 
 * Being [DRY](https://cs.wikipedia.org/wiki/Don%27t_repeat_yourself) is essential, do not repeat code. Name expressions to reuse then, introduce helper functions.
 * Local names (via `where` or `let-in`) in functions should be introduced to make the code more readable. Creating helper functions in module scope is **awful**.
@@ -25,7 +24,7 @@ Hints & general requirements:
 * In this homework you will work with various containers, look up the documentation. *Do not re-invent the wheel!*
 * You must understand your code completely!
 
-## Notes 
+## Notes
 
  * In case of uncertainty, check the [dummy homework](https://github.com/MI-AFP/hw00) to recall what is the homework workflow for this course.
  * If you encounter some trouble, create an issue in your repository.
