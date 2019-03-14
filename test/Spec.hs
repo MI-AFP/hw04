@@ -1,6 +1,6 @@
 import Test.Hspec
 
-import qualified ListsSpec
+import qualified LoggingSpec
 import qualified StackSpec
 import qualified StackMachineSpec
 
@@ -9,6 +9,6 @@ main = hspec spec
 
 spec :: Spec
 spec = do
-  describe "Lists"        ListsSpec.spec
+  describe "Logging"      LoggingSpec.spec
   describe "Data.Stack"   StackSpec.spec
   describe "StackMachine" StackMachineSpec.spec
