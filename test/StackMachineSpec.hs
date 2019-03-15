@@ -91,6 +91,8 @@ spec = do
       runProgram (TV 4 $. TV 0 $. JZ "end" $. TV 5 $. "end" $: WR $. EOP) Seq.empty `shouldBe` Seq.singleton 4
       runProgram (TV 4 $. TV 1 $. JZ "end" $. TV 5 $. "end" $: WR $. EOP) Seq.empty `shouldBe` Seq.singleton 5
       runProgram (TV 4 $. TV (-1) $. JZ "end" $. TV 5 $. "end" $: WR $. EOP) Seq.empty `shouldBe` Seq.singleton 5
+    it "is able to perform both forward and backward jump to the same label" $ do
+        runProgram (TV (-1) $. TV 10 $. TV 0 $. TV 4 $. JU "stop" $. RD $. "stop" $: WR $. JZ "stop" $. EOP) Seq.empty `shouldBe` Seq.fromList [4, 10]
     it "fails if not value at the top of stack (JZ)" $ do
       evaluate (runProgram (TA 0 $. JZ "end" $. WR $. "end" $: EOP) Seq.empty) `shouldThrow` errorCall "Not value"
       evaluate (runProgram (TV 0 $. TA 10 $. JZ "end" $. WR $. "end" $: EOP) Seq.empty) `shouldThrow` errorCall "Not value"
