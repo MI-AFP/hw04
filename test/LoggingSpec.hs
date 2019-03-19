@@ -14,6 +14,7 @@ esInternal1 = Internal { iesComponent = "comp1", iesCallID = "com.call.id26218" 
 esInternal2 = Internal { iesComponent = "comp2", iesCallID = "com.call.id26218" }
 esExternal = External { eesURI = "//some/uri", eesDescription = "none" }
 esCombined = Combined [esInternal1, esExternal]
+esDeep = Combined [esCombined, esCombined]
 
 defaultLogMsg = LogMessage { lmTimestamp  = timestamp2
                            , lmSource     = Unknown
@@ -38,6 +39,8 @@ spec = describe "LogMessage" $ do
           (esInternal2 @@ esCombined) `shouldBe` Combined [esInternal2,esInternal1,esExternal]
           (esCombined @@ esInternal2) `shouldBe` Combined [esInternal1,esExternal,esInternal2]
           (esCombined @@ esCombined) `shouldBe` Combined [esInternal1,esExternal,esInternal1,esExternal]
+        it "combines event complex combined sources" $
+          (esDeep @@ esInternal2) `shouldBe` Combined [esInternal1,esExternal,esInternal1,esExternal,esInternal2]
         it "can be chained easily" $
           (esInternal1 @@ esInternal2 @@ esExternal) `shouldBe` Combined [esInternal1,esInternal2,esExternal]
       describe "~~" $ do
