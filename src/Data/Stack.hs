@@ -1,11 +1,19 @@
 module Data.Stack where
 
 -- https://en.wikipedia.org/wiki/Stack_(abstract_data_type)
-data Stack a = Empty | NonEmpty a (Stack a)
+data Stack a = Empty | a :<| (Stack a)
              deriving (Show, Read, Eq)
 
+infixr 5 :<|
+
+-- The empty stack
 empty :: Stack a
 empty = Empty
+
+-- A singleton stack
+-- TODO: implement stack
+singleton :: a -> Stack a
+singleton = undefined
 
 -- Get element from top of stack
 -- If stack is empty error with message "Empty stack" will be raised

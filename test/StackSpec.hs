@@ -6,23 +6,29 @@ import Control.Exception
 import qualified Data.Stack as S
 
 stack1 :: S.Stack Integer
-stack1 = S.NonEmpty 1 (S.NonEmpty 2 (S.NonEmpty 3 S.Empty))
+stack1 =  1 S.:<| 2 S.:<| 3 S.:<| S.Empty
 stack2 :: S.Stack String
-stack2 = S.NonEmpty "Hello" (S.NonEmpty "how" (S.NonEmpty "are" (S.NonEmpty "you" S.Empty)))
+stack2 = "Hello" S.:<| "how" S.:<| "are" S.:<| "you" S.:<| S.Empty
 stack3 :: S.Stack Int
-stack3 = S.NonEmpty 1782 (S.NonEmpty (-245) S.Empty)
+stack3 = 1782 S.:<| (-245) S.:<| S.Empty
 stackEmpty :: S.Stack Double
 stackEmpty = S.Empty
 
 stack1Popped :: S.Stack Integer
-stack1Popped = S.NonEmpty 2 (S.NonEmpty 3 S.Empty)
+stack1Popped = 2 S.:<| 3 S.:<| S.Empty
 stack2Popped :: S.Stack String
-stack2Popped = S.NonEmpty "how" (S.NonEmpty "are" (S.NonEmpty "you" S.Empty))
+stack2Popped = "how" S.:<| "are"S.:<| "you" S.:<| S.Empty
 stack3Popped :: S.Stack Int
-stack3Popped = S.NonEmpty (-245) S.Empty
+stack3Popped = (-245) S.:<| S.Empty
 
 spec :: Spec
 spec = do
+  describe "singleton" $ do
+    it "creates singleton stack" $ do
+      S.singleton 3 `shouldBe` (3 S.:<| S.Empty)
+      S.singleton "Hello" `shouldBe` ("Hello" S.:<| S.Empty)
+      S.singleton 1782.5 `shouldBe` (1782.5 S.:<| S.Empty)
+
   describe "top" $ do
     it "returns top element" $ do
       S.top stack1 `shouldBe` 1
@@ -57,10 +63,10 @@ spec = do
 
   describe "push" $
     it "adds new top element" $ do
-      S.push 7 stack1 `shouldBe` S.NonEmpty 7 stack1
-      S.push "Hi" stack2 `shouldBe` S.NonEmpty "Hi" stack2
-      S.push (-4) stack3 `shouldBe` S.NonEmpty (-4) stack3
-      S.push 'a' S.Empty `shouldBe` S.NonEmpty 'a' S.Empty
+      S.push 7 stack1 `shouldBe` (7 S.:<| stack1)
+      S.push "Hi" stack2 `shouldBe` ("Hi"  S.:<| stack2)
+      S.push (-4) stack3 `shouldBe` ((-4)  S.:<| stack3)
+      S.push 'a' S.Empty `shouldBe` ('a'  S.:<| S.Empty)
 
   describe "size" $ do
     it "returns 0 for empty stack" $

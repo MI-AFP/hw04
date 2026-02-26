@@ -1,9 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Fixtures.Programs where
+module Fixtures.ProgramsMSU where
 
 import Control.Program
 
+-------------------------------------------------------------------------------------
+-- All programs below written by Marek Suchánek for Maude and rewritten to Haskell --
+-------------------------------------------------------------------------------------
 
 -- Program for sum N numbers (input: N A1 A2 ... AN):
 --
@@ -192,7 +195,3 @@ fib = TA 0 $. RD $. ST $. TA 1 $. TV 0 $. ST $. TA 2 $. TV 1 $. ST $. TA 3 $. TA
 -- "END":  EOP
 fibSeq :: Program
 fibSeq = TA 0 $. RD $. ST $. TA 1 $. TV 0 $. ST $. TA 2 $. TV 1 $. ST $. TA 1 $. DR $. WR $. TA 0 $. DR $. JZ "END" $. TA 0 $. TA 0 $. DR $. TV (-1) $. AD $. ST $. TA 2 $. DR $. WR $. "LOOP" $: TA 0 $. DR $. JZ "END" $. TA 0 $. TA 0 $. DR $. TV (-1) $. AD $. ST $. TA 3 $. TA 1 $. DR $. TA 2 $. DR $. AD $. ST $. TA 1 $. TA 2 $. DR $. ST $. TA 2 $. TA 3 $. DR $. ST $. TA 3 $. DR $. WR $. JU "LOOP" $. "END" $: EOP
-
--------------------------------------------------------------------------------
--- All programs written by Marek Suchánek for Maude and rewritten to Haskell --
--------------------------------------------------------------------------------
